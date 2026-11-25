@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lakshay Varshney · DevOps Engineer</title>
+<meta name="description" content="Lakshay Varshney is a DevOps Engineer in Noida, India building AI-augmented CI/CD, DevSecOps and monitoring with Jenkins, Prometheus, Grafana, Claude Code and PR-Agent.">
+<meta name="author" content="Lakshay Varshney">
+<meta name="keywords" content="DevOps Engineer, DevSecOps, Jenkins, Shared Library, Prometheus, Grafana, Grafana MCP, Claude Code, PR-Agent, AWS, Terraform, Docker, Kubernetes, Linux, Nginx, Noida">
+<meta name="theme-color" content="#0e1a22">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Lakshay Varshney · DevOps Engineer">
+<meta property="og:description" content="AI-augmented CI/CD, DevSecOps and monitoring for a platform serving 50,000+ clients.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e1a22'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%238aa9ff' text-anchor='middle'%3ELV%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a CI run as the hero; the rest reads like a clean build log, one column of stages on a wide measure. */
+:root{
+  --bg:#f4f6f7;
+  --surface:#ffffff;
+  --ink:#0e1a22;
+  --muted:#52616b;
+  --line:#dbe1e5;
+  --accent:#1d4ed8;
+  --accent-soft:#e4ebfb;
+  --pass:#1a7f4b;
+  --pass-soft:#e2f3ea;
+  --code-bg:#0e1a22;
+  --code-fg:#d7e0e6;
+  --code-dim:#7f909c;
+  --font-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --maxw:1120px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1116; --surface:#121a21; --ink:#e6ecf0; --muted:#97a6b0; --line:#23303a;
+    --accent:#8aa9ff; --accent-soft:#1a2747; --pass:#5fd39a; --pass-soft:#123326;
+    --code-bg:#070b0f; --code-fg:#d7e0e6; --code-dim:#6f808c;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1116; --surface:#121a21; --ink:#e6ecf0; --muted:#97a6b0; --line:#23303a;
+  --accent:#8aa9ff; --accent-soft:#1a2747; --pass:#5fd39a; --pass-soft:#123326;
+  --code-bg:#070b0f; --code-fg:#d7e0e6; --code-dim:#6f808c;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0}
+img{max-width:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.1}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.mono{font-family:var(--font-mono)}
+.label{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* Top bar */
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px;flex-wrap:wrap}
+.brand{font-family:var(--font-mono);font-size:14px;color:var(--ink);text-decoration:none;font-weight:500}
+.brand b{color:var(--accent);font-weight:500}
+.nav{display:flex;gap:20px;flex-wrap:wrap}
+.nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.nav a:hover{color:var(--ink)}
+
+/* Hero */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center;padding-block:40px 64px}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:13px;color:var(--pass);background:var(--pass-soft);padding:6px 12px;border-radius:999px;align-self:flex-start}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--pass);display:block}
+.hero h1{font-size:clamp(44px,7.4vw,84px);font-weight:800;letter-spacing:-.025em}
+.role{font-family:var(--font-display);font-weight:500;font-size:clamp(19px,2.2vw,24px);color:var(--muted);line-height:1.35}
+.role span{color:var(--ink)}
+.summary{max-width:60ch;color:var(--muted);font-size:17px}
+.summary strong{color:var(--ink);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:500 15px/1 var(--font-body);padding:13px 18px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary:hover{opacity:.9}
+.btn svg{width:16px;height:16px;flex:none}
+
+/* Pipeline console */
+.console{background:var(--code-bg);color:var(--code-fg);border-radius:14px;font-family:var(--font-mono);font-size:13.5px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,26,34,.55);min-width:0}
+.console-head{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);color:var(--code-dim);font-size:12.5px;flex-wrap:wrap}
+.console-head b{color:var(--code-fg);font-weight:500}
+.stages{list-style:none;margin:0;padding:10px 0}
+.stage{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;padding:10px 18px;position:relative}
+.stage + .stage::before{content:"";position:absolute;left:28px;top:-10px;height:20px;width:1px;background:rgba(255,255,255,.14)}
+.tick{width:20px;height:20px;border-radius:50%;background:#1f6f47;display:grid;place-items:center;margin-top:1px}
+.tick svg{width:12px;height:12px;color:#c9f5dc}
+.stage-name{color:#fff}
+.stage-tool{color:var(--code-dim);font-size:12.5px;display:block}
+.stage-tag{font-size:11.5px;color:#9fe3be;padding:2px 8px;border:1px solid rgba(159,227,190,.3);border-radius:999px;white-space:nowrap}
+.stage.ai .stage-tag{color:#b9c8ff;border-color:rgba(185,200,255,.35)}
+.console-foot{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.console-foot .ok{color:#7fe0ac}
+@media (prefers-reduced-motion: no-preference){
+  .stage .tick{animation:pop .5s ease both}
+  .stage:nth-child(2) .tick{animation-delay:.12s}
+  .stage:nth-child(3) .tick{animation-delay:.24s}
+  .stage:nth-child(4) .tick{animation-delay:.36s}
+  .stage:nth-child(5) .tick{animation-delay:.48s}
+  .stage:nth-child(6) .tick{animation-delay:.6s}
+  @keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
+}
+
+/* Metrics */
+.metrics{border-block:1px solid var(--line);background:var(--surface)}
+.metrics .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-block:0}
+.metric{padding:28px 24px;display:flex;flex-direction:column;gap:6px;border-left:1px solid var(--line)}
+.metric:first-child{border-left:none;padding-left:0}
+.metric .num{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.6vw,42px);letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.metric .txt{color:var(--muted);font-size:14px;line-height:1.4}
+
+/* Sections */
+section.block .wrap{padding-block:88px 0}
+.sec-head{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px;margin-bottom:36px;align-items:baseline}
+.sec-head h2{font-size:clamp(30px,4vw,44px);font-weight:700;letter-spacing:-.02em}
+.sec-body{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px}
+.sec-body > *{min-width:0}
+
+/* Experience */
+.job-meta{display:flex;flex-direction:column;gap:4px}
+.job-meta .when{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.job-meta .now{font-family:var(--font-mono);font-size:12px;color:var(--pass);display:inline-flex;gap:6px;align-items:center}
+.job-meta .now i{width:7px;height:7px;border-radius:50%;background:var(--pass);display:block}
+.job h3{font-size:26px;font-weight:700}
+.job .org{color:var(--muted);font-size:17px;margin-top:4px}
+.envs{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{font-family:var(--font-mono);font-size:12.5px;padding:4px 10px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.chip.plain{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.points{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:18px}
+.points li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding-top:18px;border-top:1px solid var(--line)}
+.points .k{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);padding-top:3px;letter-spacing:.02em}
+.points p{color:var(--muted)}
+.points strong{color:var(--ink);font-weight:600}
+
+/* Projects */
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.project.featured{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:36px}
+.project h3{font-size:22px;font-weight:700}
+.project.featured h3{font-size:clamp(26px,3vw,32px)}
+.project p{color:var(--muted)}
+.project .stack{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.feat-intro{display:flex;flex-direction:column;gap:14px}
+.feat-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.feat-list li{padding-left:16px;border-left:2px solid var(--accent);color:var(--muted)}
+.feat-list b{display:block;color:var(--ink);font-weight:600;font-size:15px}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.skill-row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:20px 0;border-top:1px solid var(--line)}
+.skill-row h3{font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.skill-row .chips{display:flex;flex-wrap:wrap;gap:8px}
+.skill-row .chip{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:13px}
+
+/* Education */
+.edu{display:grid;gap:0}
+.edu-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}
+.edu-row h3{font-size:21px;font-weight:700}
+.edu-row .school{color:var(--muted);grid-column:1}
+.edu-row .when{font-family:var(--font-mono);font-size:13px;color:var(--muted);grid-column:2;grid-row:1}
+.edu-row .gpa{font-family:var(--font-mono);font-size:13px;grid-column:2;grid-row:2;text-align:right;font-variant-numeric:tabular-nums}
+
+/* Contact */
+.contact .wrap{padding-block:96px 48px}
+.contact-card{background:var(--ink);color:var(--bg);border-radius:16px;padding:48px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end}
+.contact-card h2{font-size:clamp(32px,4.4vw,52px);font-weight:800;letter-spacing:-.02em}
+.contact-card p{opacity:.75;margin-top:14px;max-width:44ch}
+.contact-list{display:grid;gap:10px}
+.c-row{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid color-mix(in srgb, var(--bg) 18%, transparent)}
+.c-row .label{color:inherit;opacity:.6}
+.c-row .val{font-family:var(--font-mono);font-size:15px;overflow-wrap:anywhere;user-select:all}
+.c-row a.val{color:inherit}
+.copy{font:500 12px/1 var(--font-mono);padding:8px 10px;border-radius:6px;border:1px solid color-mix(in srgb, var(--bg) 30%, transparent);background:transparent;color:inherit;cursor:pointer;min-width:62px}
+.copy:hover{background:color-mix(in srgb, var(--bg) 12%, transparent)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:24px 40px;color:var(--muted);font-size:13px;font-family:var(--font-mono)}
+
+/* Responsive */
+@media (max-width: 920px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:40px}
+  .sec-head,.sec-body{grid-template-columns:minmax(0,1fr);gap:16px}
+  .project.featured{grid-template-columns:minmax(0,1fr)}
+  .projects{grid-template-columns:minmax(0,1fr)}
+  .contact-card{grid-template-columns:minmax(0,1fr);padding:36px}
+}
+@media (max-width: 720px){
+  .metrics .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metric{padding:22px 16px}
+  .metric:nth-child(odd){border-left:none;padding-left:0}
+  .metric:nth-child(n+3){border-top:1px solid var(--line)}
+  .projects,.skills{grid-template-columns:minmax(0,1fr)}
+  .points li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .nav{display:none}
+  section.block .wrap{padding-block:64px 0}
+  .project,.project.featured{padding:22px}
+  .contact-card{padding:26px}
+  .c-row{grid-template-columns:minmax(0,1fr) auto}
+  .c-row .label{grid-column:1 / -1}
+  .edu-row{grid-template-columns:minmax(0,1fr)}
+  .edu-row .when,.edu-row .gpa{grid-column:1;grid-row:auto;text-align:left}
+  .stage-tag{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">~/lakshay<b>.varshney</b></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="status"><i></i>Open to DevOps &amp; DevSecOps roles</span>
+        <h1>Lakshay Varshney</h1>
+        <p class="role"><span>DevOps Engineer</span> · DevSecOps · AI-augmented CI/CD &amp; monitoring</p>
+        <p class="summary">I build <strong>AI-augmented CI/CD and monitoring</strong> for a platform serving <strong>50,000+ clients</strong>. I connect Claude Code, PR-Agent and the Grafana MCP server to Jenkins, Prometheus and Grafana so that code review, vulnerability detection, alert investigation and pipeline debugging happen automatically across <strong>70+ Linux servers</strong>.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://www.linkedin.com/in/lakshay-varshney/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.84v1.54h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13V21h-4v-4.97c0-1.19-.02-2.71-1.65-2.71-1.65 0-1.9 1.29-1.9 2.62V21h-4V9.75Z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="console" aria-label="Deployment pipeline I built">
+        <div class="console-head">
+          <span><b>deploy-pipeline</b> · Jenkins Shared Library</span>
+          <span>Prod · Pre-Prod · UAT</span>
+        </div>
+        <ol class="stages">
+          <li class="stage">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Checkout</span><span class="stage-tool">git · branch &amp; PR</span></span>
+            <span class="stage-tag">passed</span>
+          </li>
+          <li class="stage ai">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">AI security &amp; code review</span><span class="stage-tool">Claude Code + PR-Agent · secrets, injection, deps</span></span>
+            <span class="stage-tag">AI gate</span>
+          </li>
+          <li class="stage">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Build &amp; QA</span><span class="stage-tool">docker · QA pipeline</span></span>
+            <span class="stage-tag">passed</span>
+          </li>
+          <li class="stage ai">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Config validation</span><span class="stage-tool">appsettings per environment · Claude Code</span></span>
+            <span class="stage-tag">AI gate</span>
+          </li>
+          <li class="stage">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Deploy</span><span class="stage-tool">rollback stage armed · previous stable build</span></span>
+            <span class="stage-tag">passed</span>
+          </li>
+          <li class="stage ai">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Monitor</span><span class="stage-tool">Prometheus · Grafana · Grafana MCP agent</span></span>
+            <span class="stage-tag">watching</span>
+          </li>
+        </ol>
+        <div class="console-foot">
+          <span class="ok">✓ Finished: SUCCESS</span>
+          <span>deploy time &lt; 30 min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="metrics" aria-label="Impact">
+    <div class="wrap">
+      <div class="metric"><span class="num">50,000+</span><span class="txt">clients on the platform I keep running</span></div>
+      <div class="metric"><span class="num">70+</span><span class="txt">production Linux servers managed</span></div>
+      <div class="metric"><span class="num">60–70%</span><span class="txt">less deployment time with the Shared Library</span></div>
+      <div class="metric"><span class="num">0</span><span class="txt">manual deployments after the pipeline rollout</span></div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Experience</span>
+        <h2>Running production for 50,000+ clients</h2>
+      </div>
+      <div class="sec-body">
+        <div class="job-meta">
+          <span class="when">Dec 2024 – Present</span>
+          <span class="now"><i></i>current</span>
+        </div>
+        <article class="job">
+          <h3>DevOps Engineer</h3>
+          <p class="org">MargBooks · Noida, India</p>
+          <div class="envs">
+            <span class="chip">Production</span>
+            <span class="chip">Pre-Production</span>
+            <span class="chip">UAT</span>
+          </div>
+          <ul class="points">
+            <li><span class="k">Infrastructure</span><p>Manage production infrastructure across Production, Pre-Production and UAT, keeping <strong>70+ Linux servers</strong> stable and highly available.</p></li>
+            <li><span class="k">CI/CD</span><p>Designed <strong>Jenkins pipelines on a reusable Shared Library</strong>, cutting deployment time by <strong>60–70% to under 30 minutes</strong>, with a rollback stage and a QA pipeline that removed manual deployments.</p></li>
+            <li><span class="k">AI quality gate</span><p>Integrated <strong>Claude Code and PR-Agent</strong> into the pipeline to review every change, detect security vulnerabilities and stop bad code before production.</p></li>
+            <li><span class="k">AI monitoring</span><p>Built a <strong>Claude Code agent connected to Prometheus and Grafana through the Grafana MCP server</strong>. It investigates Grafana alerts against live metrics and tells the team the likely cause.</p></li>
+            <li><span class="k">Root cause</span><p>Use AI to find the root cause of failed builds and weak pipeline stages, and Claude Code to configure and validate <strong>appsettings</strong> across environments.</p></li>
+            <li><span class="k">Migration</span><p>Migrated servers from <strong>AWS to a private cloud</strong> with minimal disruption, configured Nginx from scratch and automated recurring operations with Bash.</p></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Projects</span>
+        <h2>Pipelines, agents and infrastructure</h2>
+      </div>
+      <div class="projects">
+        <article class="project featured">
+          <div class="feat-intro">
+            <span class="label">Featured</span>
+            <h3>AI-Powered DevSecOps Pipeline &amp; Monitoring Agent</h3>
+            <p>An AI layer on top of the Jenkins Shared Library and the Grafana stack. It reviews every pull request for security issues, turns raw alerts into summarised incidents and reads failed build logs so nobody has to.</p>
+            <div class="stack">
+              <span class="chip">Claude Code</span><span class="chip">PR-Agent</span><span class="chip">Grafana MCP</span><span class="chip">Jenkins</span><span class="chip">Prometheus</span>
+            </div>
+          </div>
+          <ul class="feat-list">
+            <li><b>Code review</b>A PR-Agent and Claude Code stage checks every pull request for hardcoded secrets, injection, insecure dependencies and code quality.</li>
+            <li><b>Alerting</b>Through the Grafana MCP server the agent reads firing alerts, queries Prometheus metrics and dashboards, and manages alert rules.</li>
+            <li><b>Pipeline analysis</b>AI reads build logs and failed runs to pinpoint flaws and bottlenecks in pipeline stages, replacing slow manual log reading.</li>
+            <li><b>Configuration</b>Claude Code generates and validates appsettings and service files for Prod, Pre-Prod and UAT.</li>
+          </ul>
+        </article>
+
+        <article class="project">
+          <span class="label">CI/CD</span>
+          <h3>CI/CD Pipeline on a Jenkins Shared Library</h3>
+          <p>A reusable Shared Library that standardises deployments across Production, Pre-Production and UAT. Deployment time dropped by 60–70% and manual deployments stopped. A rollback stage restores the whole deployment to the previous stable build.</p>
+          <div class="stack"><span class="chip plain">Jenkins</span><span class="chip plain">Shared Library</span><span class="chip plain">Docker</span><span class="chip plain">Git</span></div>
+        </article>
+
+        <article class="project">
+          <span class="label">Infrastructure</span>
+          <h3>Production Infrastructure, Monitoring &amp; Cloud Migration</h3>
+          <p>Built 70+ production servers with Nginx, set up Prometheus and Grafana dashboards for system and application health, and moved workloads from AWS to a private cloud.</p>
+          <div class="stack"><span class="chip plain">Linux</span><span class="chip plain">Nginx</span><span class="chip plain">AWS</span><span class="chip plain">Prometheus</span><span class="chip plain">Grafana</span></div>
+        </article>
+
+        <article class="project">
+          <span class="label">Containers</span>
+          <h3>3-Tier Application</h3>
+          <p>An Angular, Node.js and SQL application with each tier containerised in Docker, so the whole stack sets up the same way on any machine.</p>
+          <div class="stack"><span class="chip plain">Docker</span><span class="chip plain">Angular</span><span class="chip plain">Node.js</span><span class="chip plain">SQL</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Skills</span>
+        <h2>Toolchain</h2>
+      </div>
+      <div class="skills">
+        <div class="skill-row"><h3>AI &amp; Agents</h3><div class="chips"><span class="chip">Claude Code</span><span class="chip">PR-Agent</span><span class="chip">Grafana MCP server</span><span class="chip">Model Context Protocol</span><span class="chip">AI agents</span><span class="chip">AI root-cause analysis</span></div></div>
+        <div class="skill-row"><h3>DevSecOps</h3><div class="chips"><span class="chip">AI vulnerability scanning in CI/CD</span><span class="chip">Secure code review</span><span class="chip">Configuration validation</span></div></div>
+        <div class="skill-row"><h3>CI/CD &amp; Version Control</h3><div class="chips"><span class="chip">Jenkins Pipelines</span><span class="chip">Jenkins Shared Libraries</span><span class="chip">Git</span></div></div>
+        <div class="skill-row"><h3>Monitoring &amp; Visualization</h3><div class="chips"><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">Grafana Alerting</span><span class="chip">Tableau</span></div></div>
+        <div class="skill-row"><h3>Cloud &amp; IaC</h3><div class="chips"><span class="chip">AWS EC2</span><span class="chip">S3</span><span class="chip">IAM</span><span class="chip">VPC</span><span class="chip">CloudWatch</span><span class="chip">Terraform</span></div></div>
+        <div class="skill-row"><h3>Containers</h3><div class="chips"><span class="chip">Docker</span><span class="chip">Kubernetes</span></div></div>
+        <div class="skill-row"><h3>OS, Web Server &amp; Scripting</h3><div class="chips"><span class="chip">Linux</span><span class="chip">Nginx</span><span class="chip">Bash</span></div></div>
+        <div class="skill-row"><h3>Environments</h3><div class="chips"><span class="chip">Production</span><span class="chip">Pre-Production</span><span class="chip">UAT</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Education</span>
+        <h2>Computer applications</h2>
+      </div>
+      <div class="sec-body">
+        <span></span>
+        <div class="edu">
+          <div class="edu-row"><h3>Master of Computer Applications</h3><span class="when">Sept 2022 – Jun 2024</span><span class="school">JIMS · GGSIPU</span><span class="gpa">CGPA 8.1</span></div>
+          <div class="edu-row"><h3>Bachelor of Computer Applications</h3><span class="when">Aug 2019 – Jun 2022</span><span class="school">SIMS · GGSIPU</span><span class="gpa">CGPA 8.7</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <div>
+          <h2>Let's talk about your pipeline.</h2>
+          <p>I'm looking for DevOps and DevSecOps roles where CI/CD, monitoring and AI tooling meet. Based in Noida, India.</p>
+        </div>
+        <div class="contact-list">
+          <div class="c-row"><span class="label">Email</span><a class="val" id="c-email" href="mailto:codebylakshay@gmail.com">codebylakshay@gmail.com</a><button class="copy" type="button" data-copy="codebylakshay@gmail.com">Copy</button></div>
+          <div class="c-row"><span class="label">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/lakshay-varshney/" target="_blank" rel="noopener">in/lakshay-varshney</a><button class="copy" type="button" data-copy="https://www.linkedin.com/in/lakshay-varshney/">Copy</button></div>
+          <div class="c-row"><span class="label">Location</span><span class="val">Noida, India</span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Lakshay Varshney</span>
+    <span>DevOps · DevSecOps · AI-augmented CI/CD</span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var text = btn.getAttribute('data-copy');
+    var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); };
+    var fallback = function(){
+      var row = btn.parentElement.querySelector('.val');
+      var r = document.createRange(); r.selectNodeContents(row);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+      setTimeout(function(){ btn.textContent = 'Copy'; }, 1600);
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    } catch(e){ fallback(); }
+  });
+});
+</script>
+
+</body>
+</html>
