@@ -3,381 +3,461 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Lakshay Varshney: AI Training Specialist and AI Agent Builder. 2+ years on Outlier across text, image and audio projects.">
-<style>body{margin:0}</style>
-<title>Lakshay Varshney · AI Training</title>
+<title>Lakshay Varshney · DevOps Engineer</title>
+<meta name="description" content="Lakshay Varshney is a DevOps Engineer in Noida, India building AI-augmented CI/CD, DevSecOps and monitoring with Jenkins, Prometheus, Grafana, Claude Code and PR-Agent.">
+<meta name="author" content="Lakshay Varshney">
+<meta name="keywords" content="DevOps Engineer, DevSecOps, Jenkins, Shared Library, Prometheus, Grafana, Grafana MCP, Claude Code, PR-Agent, AWS, Terraform, Docker, Kubernetes, Linux, Nginx, Noida">
+<meta name="theme-color" content="#0e1a22">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Lakshay Varshney · DevOps Engineer">
+<meta property="og:description" content="AI-augmented CI/CD, DevSecOps and monitoring for a platform serving 50,000+ clients.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e1a22'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%238aa9ff' text-anchor='middle'%3ELV%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one reading column with a live "sample task" card as the hero — the page looks like the work itself. */
+/* Layout: a CI run as the hero; the rest reads like a clean build log, one column of stages on a wide measure. */
 :root{
-  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#141A26; --muted:#5A6476; --line:#DCE1EA;
-  --accent:#2747C9; --accent-soft:#E6EBFB; --mark:#FFE38A; --good:#1C7C54; --warn:#B4561B;
-  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body:"Instrument Sans", "Helvetica Neue", Arial, sans-serif;
-  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --bg:#f4f6f7;
+  --surface:#ffffff;
+  --ink:#0e1a22;
+  --muted:#52616b;
+  --line:#dbe1e5;
+  --accent:#1d4ed8;
+  --accent-soft:#e4ebfb;
+  --pass:#1a7f4b;
+  --pass-soft:#e2f3ea;
+  --code-bg:#0e1a22;
+  --code-fg:#d7e0e6;
+  --code-dim:#7f909c;
+  --font-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --maxw:1120px;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0E121A; --surface:#161C27; --ink:#E7EBF3; --muted:#97A1B4; --line:#283143;
-  --accent:#8EA6FF; --accent-soft:#1D2742; --mark:#6B5A1A; --good:#5BC79A; --warn:#F0A06A; color-scheme:dark}}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1116; --surface:#121a21; --ink:#e6ecf0; --muted:#97a6b0; --line:#23303a;
+    --accent:#8aa9ff; --accent-soft:#1a2747; --pass:#5fd39a; --pass-soft:#123326;
+    --code-bg:#070b0f; --code-fg:#d7e0e6; --code-dim:#6f808c;
+    color-scheme:dark;
+  }
+}
 :root[data-theme="dark"]{
-  --bg:#0E121A; --surface:#161C27; --ink:#E7EBF3; --muted:#97A1B4; --line:#283143;
-  --accent:#8EA6FF; --accent-soft:#1D2742; --mark:#6B5A1A; --good:#5BC79A; --warn:#F0A06A; color-scheme:dark}
+  --bg:#0b1116; --surface:#121a21; --ink:#e6ecf0; --muted:#97a6b0; --line:#23303a;
+  --accent:#8aa9ff; --accent-soft:#1a2747; --pass:#5fd39a; --pass-soft:#123326;
+  --code-bg:#070b0f; --code-fg:#d7e0e6; --code-dim:#6f808c;
+  color-scheme:dark;
+}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);
-  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
-.wrap{max-width:1040px;margin:0 auto}
-a{color:var(--accent)}
+html{scroll-behavior:smooth}
+body{margin:0}
+img{max-width:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
-h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:700;letter-spacing:-.01em}
-h3{font-size:1.15rem;font-weight:700}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.1}
 p{margin:0}
-.label{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:2px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.mono{font-family:var(--font-mono)}
+.label{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
-/* Nav */
-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:22px;flex-wrap:wrap}
-.brand{font:700 1.05rem var(--display)}
-.brand span{color:var(--accent)}
-nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
-nav a{color:var(--muted);text-decoration:none;font-size:.92rem}
-nav a:hover{color:var(--ink)}
+/* Top bar */
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px;flex-wrap:wrap}
+.brand{font-family:var(--font-mono);font-size:14px;color:var(--ink);text-decoration:none;font-weight:500}
+.brand b{color:var(--accent);font-weight:500}
+.nav{display:flex;gap:20px;flex-wrap:wrap}
+.nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.nav a:hover{color:var(--ink)}
 
 /* Hero */
-.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding-block:40px 64px}
-.hero > *{min-width:0}
-.status{display:inline-flex;align-items:center;gap:8px;font:500 .8rem var(--mono);color:var(--good);
-  background:var(--surface);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
-.status i{width:8px;height:8px;border-radius:50%;background:var(--good);display:block}
-.hero h1{font-size:clamp(2.4rem,5.6vw,4rem);font-weight:700;letter-spacing:-.025em;margin-top:20px}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.lede{color:var(--muted);font-size:1.1rem;max-width:34rem;margin-top:18px}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-block;font:600 .95rem var(--body);padding:12px 20px;border-radius:8px;text-decoration:none;border:1px solid var(--accent)}
-.btn.primary{background:var(--accent);color:var(--bg)}
-.btn.ghost{color:var(--accent);background:transparent}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center;padding-block:40px 64px}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:13px;color:var(--pass);background:var(--pass-soft);padding:6px 12px;border-radius:999px;align-self:flex-start}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--pass);display:block}
+.hero h1{font-size:clamp(44px,7.4vw,84px);font-weight:800;letter-spacing:-.025em}
+.role{font-family:var(--font-display);font-weight:500;font-size:clamp(19px,2.2vw,24px);color:var(--muted);line-height:1.35}
+.role span{color:var(--ink)}
+.summary{max-width:60ch;color:var(--muted);font-size:17px}
+.summary strong{color:var(--ink);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:500 15px/1 var(--font-body);padding:13px 18px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary:hover{opacity:.9}
+.btn svg{width:16px;height:16px;flex:none}
 
-/* Sample task card */
-.task{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;
-  box-shadow:0 18px 40px -24px rgba(20,30,60,.35)}
-.task-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.tabs{display:flex;gap:4px}
-.tabs button{font:500 .78rem var(--mono);border:1px solid transparent;background:none;color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--accent-soft);color:var(--accent);border-color:var(--line)}
-.task-id{font:400 .72rem var(--mono);color:var(--muted)}
-.task-body{padding:18px 16px;display:grid;gap:14px}
-.field .label{display:block;margin-bottom:6px}
-.field p{font-size:.95rem}
-.input-box{font:400 .85rem/1.55 var(--mono);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--ink)}
-.rubric{display:grid;gap:8px}
-.row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;font-size:.9rem}
-.dots{display:flex;gap:4px}
-.dots b{width:14px;height:14px;border-radius:3px;background:var(--line);display:block}
-.dots b.on{background:var(--accent)}
-.verdict{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:12px;border-top:1px dashed var(--line);flex-wrap:wrap}
-.chip{font:500 .75rem var(--mono);padding:4px 10px;border-radius:999px;border:1px solid currentColor}
-.chip.good{color:var(--good)} .chip.warn{color:var(--warn)}
+/* Pipeline console */
+.console{background:var(--code-bg);color:var(--code-fg);border-radius:14px;font-family:var(--font-mono);font-size:13.5px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,26,34,.55);min-width:0}
+.console-head{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);color:var(--code-dim);font-size:12.5px;flex-wrap:wrap}
+.console-head b{color:var(--code-fg);font-weight:500}
+.stages{list-style:none;margin:0;padding:10px 0}
+.stage{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;padding:10px 18px;position:relative}
+.stage + .stage::before{content:"";position:absolute;left:28px;top:-10px;height:20px;width:1px;background:rgba(255,255,255,.14)}
+.tick{width:20px;height:20px;border-radius:50%;background:#1f6f47;display:grid;place-items:center;margin-top:1px}
+.tick svg{width:12px;height:12px;color:#c9f5dc}
+.stage-name{color:#fff}
+.stage-tool{color:var(--code-dim);font-size:12.5px;display:block}
+.stage-tag{font-size:11.5px;color:#9fe3be;padding:2px 8px;border:1px solid rgba(159,227,190,.3);border-radius:999px;white-space:nowrap}
+.stage.ai .stage-tag{color:#b9c8ff;border-color:rgba(185,200,255,.35)}
+.console-foot{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.console-foot .ok{color:#7fe0ac}
+@media (prefers-reduced-motion: no-preference){
+  .stage .tick{animation:pop .5s ease both}
+  .stage:nth-child(2) .tick{animation-delay:.12s}
+  .stage:nth-child(3) .tick{animation-delay:.24s}
+  .stage:nth-child(4) .tick{animation-delay:.36s}
+  .stage:nth-child(5) .tick{animation-delay:.48s}
+  .stage:nth-child(6) .tick{animation-delay:.6s}
+  @keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
+}
+
+/* Metrics */
+.metrics{border-block:1px solid var(--line);background:var(--surface)}
+.metrics .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-block:0}
+.metric{padding:28px 24px;display:flex;flex-direction:column;gap:6px;border-left:1px solid var(--line)}
+.metric:first-child{border-left:none;padding-left:0}
+.metric .num{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.6vw,42px);letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.metric .txt{color:var(--muted);font-size:14px;line-height:1.4}
 
 /* Sections */
-section{padding-block:56px;border-top:1px solid var(--line)}
-.sec-head{display:grid;gap:10px;margin-bottom:32px;max-width:44rem}
-.sec-head p{color:var(--muted)}
-
-/* Facts strip */
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-.fact{padding:20px;border-left:1px solid var(--line)}
-.fact:first-child{border-left:0}
-.fact strong{display:block;font:700 1.9rem/1 var(--display);margin-bottom:8px;font-variant-numeric:tabular-nums}
-.fact span{color:var(--muted);font-size:.9rem}
+section.block .wrap{padding-block:88px 0}
+.sec-head{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px;margin-bottom:36px;align-items:baseline}
+.sec-head h2{font-size:clamp(30px,4vw,44px);font-weight:700;letter-spacing:-.02em}
+.sec-body{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px}
+.sec-body > *{min-width:0}
 
 /* Experience */
-.role{display:grid;grid-template-columns:220px 1fr;gap:32px}
-.role > *{min-width:0}
-.role-meta h3{font-size:1.35rem}
-.role-meta p{color:var(--muted);font-size:.92rem;margin-top:6px}
-.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.proj{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:10px;align-content:start}
-.proj-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.modality{font:500 .7rem var(--mono);color:var(--accent);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.proj p{color:var(--muted);font-size:.93rem}
-.proj ul{margin:0;padding-left:18px;font-size:.9rem;display:grid;gap:4px}
+.job-meta{display:flex;flex-direction:column;gap:4px}
+.job-meta .when{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.job-meta .now{font-family:var(--font-mono);font-size:12px;color:var(--pass);display:inline-flex;gap:6px;align-items:center}
+.job-meta .now i{width:7px;height:7px;border-radius:50%;background:var(--pass);display:block}
+.job h3{font-size:26px;font-weight:700}
+.job .org{color:var(--muted);font-size:17px;margin-top:4px}
+.envs{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{font-family:var(--font-mono);font-size:12.5px;padding:4px 10px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.chip.plain{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.points{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:18px}
+.points li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding-top:18px;border-top:1px solid var(--line)}
+.points .k{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);padding-top:3px;letter-spacing:.02em}
+.points p{color:var(--muted)}
+.points strong{color:var(--ink);font-weight:600}
 
-/* Agents */
-.agents{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.agents > *{min-width:0}
-.pipeline{font:400 .82rem/1.6 var(--mono);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;overflow-x:auto}
-.pipeline .step{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:8px 0;border-bottom:1px dashed var(--line)}
-.pipeline .step:last-child{border-bottom:0}
-.pipeline .n{color:var(--accent)}
-.pipeline .c{color:var(--muted)}
-.list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
-.list li{display:grid;gap:2px}
-.list strong{font-weight:600}
-.list span{color:var(--muted);font-size:.93rem}
-
-/* Contribution */
-.offer{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.offer div{padding:20px;border-top:3px solid var(--accent);background:var(--surface);border-radius:0 0 10px 10px;display:grid;gap:8px;align-content:start}
-.offer p{color:var(--muted);font-size:.93rem}
-.targets{margin-top:24px;color:var(--muted);font-size:.95rem}
-.targets b{color:var(--ink)}
+/* Projects */
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.project.featured{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:36px}
+.project h3{font-size:22px;font-weight:700}
+.project.featured h3{font-size:clamp(26px,3vw,32px)}
+.project p{color:var(--muted)}
+.project .stack{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.feat-intro{display:flex;flex-direction:column;gap:14px}
+.feat-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.feat-list li{padding-left:16px;border-left:2px solid var(--accent);color:var(--muted)}
+.feat-list b{display:block;color:var(--ink);font-weight:600;font-size:15px}
 
 /* Skills */
-.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.skills h3{font-size:1rem;margin-bottom:10px}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tags span{font:400 .8rem var(--mono);padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.skill-row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:20px 0;border-top:1px solid var(--line)}
+.skill-row h3{font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.skill-row .chips{display:flex;flex-wrap:wrap;gap:8px}
+.skill-row .chip{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:13px}
+
+/* Education */
+.edu{display:grid;gap:0}
+.edu-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}
+.edu-row h3{font-size:21px;font-weight:700}
+.edu-row .school{color:var(--muted);grid-column:1}
+.edu-row .when{font-family:var(--font-mono);font-size:13px;color:var(--muted);grid-column:2;grid-row:1}
+.edu-row .gpa{font-family:var(--font-mono);font-size:13px;grid-column:2;grid-row:2;text-align:right;font-variant-numeric:tabular-nums}
 
 /* Contact */
-.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-.contact > *{min-width:0}
-.contact-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 20px}
-.c-row{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.93rem}
-.c-row:last-child{border-bottom:0}
-.c-row .v{overflow-wrap:anywhere}
-footer{padding-block:28px 40px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+.contact .wrap{padding-block:96px 48px}
+.contact-card{background:var(--ink);color:var(--bg);border-radius:16px;padding:48px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end}
+.contact-card h2{font-size:clamp(32px,4.4vw,52px);font-weight:800;letter-spacing:-.02em}
+.contact-card p{opacity:.75;margin-top:14px;max-width:44ch}
+.contact-list{display:grid;gap:10px}
+.c-row{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid color-mix(in srgb, var(--bg) 18%, transparent)}
+.c-row .label{color:inherit;opacity:.6}
+.c-row .val{font-family:var(--font-mono);font-size:15px;overflow-wrap:anywhere;user-select:all}
+.c-row a.val{color:inherit}
+.copy{font:500 12px/1 var(--font-mono);padding:8px 10px;border-radius:6px;border:1px solid color-mix(in srgb, var(--bg) 30%, transparent);background:transparent;color:inherit;cursor:pointer;min-width:62px}
+.copy:hover{background:color-mix(in srgb, var(--bg) 12%, transparent)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:24px 40px;color:var(--muted);font-size:13px;font-family:var(--font-mono)}
 
-@media (max-width:860px){
-  .hero,.agents,.contact,.role{grid-template-columns:1fr;gap:28px}
-  .projects,.offer,.skills{grid-template-columns:1fr}
-  .facts{grid-template-columns:repeat(2,1fr)}
-  .fact:nth-child(3){border-left:0}
-  .fact:nth-child(n+3){border-top:1px solid var(--line)}
+/* Responsive */
+@media (max-width: 920px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:40px}
+  .sec-head,.sec-body{grid-template-columns:minmax(0,1fr);gap:16px}
+  .project.featured{grid-template-columns:minmax(0,1fr)}
+  .projects{grid-template-columns:minmax(0,1fr)}
+  .contact-card{grid-template-columns:minmax(0,1fr);padding:36px}
 }
-@media (prefers-reduced-motion:no-preference){
-  .task-body{transition:opacity .2s ease}
-  .task-body.swap{opacity:.25}
+@media (max-width: 720px){
+  .metrics .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metric{padding:22px 16px}
+  .metric:nth-child(odd){border-left:none;padding-left:0}
+  .metric:nth-child(n+3){border-top:1px solid var(--line)}
+  .projects,.skills{grid-template-columns:minmax(0,1fr)}
+  .points li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .nav{display:none}
+  section.block .wrap{padding-block:64px 0}
+  .project,.project.featured{padding:22px}
+  .contact-card{padding:26px}
+  .c-row{grid-template-columns:minmax(0,1fr) auto}
+  .c-row .label{grid-column:1 / -1}
+  .edu-row{grid-template-columns:minmax(0,1fr)}
+  .edu-row .when,.edu-row .gpa{grid-column:1;grid-row:auto;text-align:left}
+  .stage-tag{display:none}
 }
 </style>
+</head>
+<body>
 
-<div class="wrap">
-  <nav>
-    <div class="brand">Lakshay Varshney<span>.</span></div>
-    <ul>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#agents">AI Agents</a></li>
-      <li><a href="#contribute">How I'd contribute</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <header class="hero">
-    <div>
-      <span class="status"><i></i>Open to platform roles</span>
-      <h1>I train AI models, and now I want to help <em>build the platforms</em> that train them.</h1>
-      <p class="lede">AI Training Specialist with 2+ years of hands-on work on Outlier across text, image-to-text and audio-to-text projects for multiple client organizations. I also design and build AI agents. I'm looking to join platform teams like Outlier and Mercor directly, in quality, project operations or task design.</p>
-      <div class="cta">
-        <a class="btn primary" href="#contact">Get in touch</a>
-        <a class="btn ghost" href="#experience">See my project work</a>
-      </div>
-    </div>
-
-    <div class="task" aria-label="Example of the kind of evaluation task I work on">
-      <div class="task-head">
-        <div class="tabs" role="tablist">
-          <button id="tab-text" role="tab" aria-selected="true" data-k="text">Text</button>
-          <button id="tab-image" role="tab" aria-selected="false" data-k="image">Image→Text</button>
-          <button id="tab-audio" role="tab" aria-selected="false" data-k="audio">Audio→Text</button>
-        </div>
-        <span class="task-id" id="task-id">sample · rlhf-eval</span>
-      </div>
-      <div class="task-body" id="task-body"></div>
-    </div>
-  </header>
-
-  <div class="facts" role="list">
-    <div class="fact" role="listitem"><strong>2+ yrs</strong><span>AI training &amp; evaluation</span></div>
-    <div class="fact" role="listitem"><strong>3</strong><span>Modalities: text, image, audio</span></div>
-    <div class="fact" role="listitem"><strong>Multi</strong><span>Client organizations served via Outlier</span></div>
-    <div class="fact" role="listitem"><strong>Agents</strong><span>Designed &amp; built with LLM tool use</span></div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">~/lakshay<b>.varshney</b></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
+</header>
 
-  <section id="experience">
-    <div class="sec-head">
-      <span class="label">Experience</span>
-      <h2>Two years inside the training loop</h2>
-      <p>I've worked on many projects on Outlier, each with its own guidelines, rubrics and quality bar. These are the ones that shaped how I think about data quality.</p>
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="status"><i></i>Open to DevOps &amp; DevSecOps roles</span>
+        <h1>Lakshay Varshney</h1>
+        <p class="role"><span>DevOps Engineer</span> · DevSecOps · AI-augmented CI/CD &amp; monitoring</p>
+        <p class="summary">I build <strong>AI-augmented CI/CD and monitoring</strong> for a platform serving <strong>50,000+ clients</strong>. I connect Claude Code, PR-Agent and the Grafana MCP server to Jenkins, Prometheus and Grafana so that code review, vulnerability detection, alert investigation and pipeline debugging happen automatically across <strong>70+ Linux servers</strong>.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://www.linkedin.com/in/lakshay-varshney/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.84v1.54h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13V21h-4v-4.97c0-1.19-.02-2.71-1.65-2.71-1.65 0-1.9 1.29-1.9 2.62V21h-4V9.75Z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="console" aria-label="Deployment pipeline I built">
+        <div class="console-head">
+          <span><b>deploy-pipeline</b> · Jenkins Shared Library</span>
+          <span>Prod · Pre-Prod · UAT</span>
+        </div>
+        <ol class="stages">
+          <li class="stage">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Checkout</span><span class="stage-tool">git · branch &amp; PR</span></span>
+            <span class="stage-tag">passed</span>
+          </li>
+          <li class="stage ai">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">AI security &amp; code review</span><span class="stage-tool">Claude Code + PR-Agent · secrets, injection, deps</span></span>
+            <span class="stage-tag">AI gate</span>
+          </li>
+          <li class="stage">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Build &amp; QA</span><span class="stage-tool">docker · QA pipeline</span></span>
+            <span class="stage-tag">passed</span>
+          </li>
+          <li class="stage ai">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Config validation</span><span class="stage-tool">appsettings per environment · Claude Code</span></span>
+            <span class="stage-tag">AI gate</span>
+          </li>
+          <li class="stage">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Deploy</span><span class="stage-tool">rollback stage armed · previous stable build</span></span>
+            <span class="stage-tag">passed</span>
+          </li>
+          <li class="stage ai">
+            <span class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span>
+            <span><span class="stage-name">Monitor</span><span class="stage-tool">Prometheus · Grafana · Grafana MCP agent</span></span>
+            <span class="stage-tag">watching</span>
+          </li>
+        </ol>
+        <div class="console-foot">
+          <span class="ok">✓ Finished: SUCCESS</span>
+          <span>deploy time &lt; 30 min</span>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="role">
-      <div class="role-meta">
-        <h3>Outlier AI</h3>
-        <p>AI Training Contributor<br>2+ years · Remote</p>
-        <p>Projects for multiple AI organizations</p>
+  <section class="metrics" aria-label="Impact">
+    <div class="wrap">
+      <div class="metric"><span class="num">50,000+</span><span class="txt">clients on the platform I keep running</span></div>
+      <div class="metric"><span class="num">70+</span><span class="txt">production Linux servers managed</span></div>
+      <div class="metric"><span class="num">60–70%</span><span class="txt">less deployment time with the Shared Library</span></div>
+      <div class="metric"><span class="num">0</span><span class="txt">manual deployments after the pipeline rollout</span></div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Experience</span>
+        <h2>Running production for 50,000+ clients</h2>
+      </div>
+      <div class="sec-body">
+        <div class="job-meta">
+          <span class="when">Dec 2024 – Present</span>
+          <span class="now"><i></i>current</span>
+        </div>
+        <article class="job">
+          <h3>DevOps Engineer</h3>
+          <p class="org">MargBooks · Noida, India</p>
+          <div class="envs">
+            <span class="chip">Production</span>
+            <span class="chip">Pre-Production</span>
+            <span class="chip">UAT</span>
+          </div>
+          <ul class="points">
+            <li><span class="k">Infrastructure</span><p>Manage production infrastructure across Production, Pre-Production and UAT, keeping <strong>70+ Linux servers</strong> stable and highly available.</p></li>
+            <li><span class="k">CI/CD</span><p>Designed <strong>Jenkins pipelines on a reusable Shared Library</strong>, cutting deployment time by <strong>60–70% to under 30 minutes</strong>, with a rollback stage and a QA pipeline that removed manual deployments.</p></li>
+            <li><span class="k">AI quality gate</span><p>Integrated <strong>Claude Code and PR-Agent</strong> into the pipeline to review every change, detect security vulnerabilities and stop bad code before production.</p></li>
+            <li><span class="k">AI monitoring</span><p>Built a <strong>Claude Code agent connected to Prometheus and Grafana through the Grafana MCP server</strong>. It investigates Grafana alerts against live metrics and tells the team the likely cause.</p></li>
+            <li><span class="k">Root cause</span><p>Use AI to find the root cause of failed builds and weak pipeline stages, and Claude Code to configure and validate <strong>appsettings</strong> across environments.</p></li>
+            <li><span class="k">Migration</span><p>Migrated servers from <strong>AWS to a private cloud</strong> with minimal disruption, configured Nginx from scratch and automated recurring operations with Bash.</p></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Projects</span>
+        <h2>Pipelines, agents and infrastructure</h2>
       </div>
       <div class="projects">
-        <article class="proj">
-          <div class="proj-top"><h3>Terminal-Bench</h3><span class="modality">Agents · Code</span></div>
-          <p>Designed hard, realistic command-line tasks used to benchmark and train AI agents working in a terminal.</p>
-          <ul>
-            <li>Wrote task instructions with one clear, checkable outcome</li>
-            <li>Built reference solutions and automated tests to verify agent results</li>
-            <li>Made tasks that hold up against shortcuts and lucky guesses</li>
+        <article class="project featured">
+          <div class="feat-intro">
+            <span class="label">Featured</span>
+            <h3>AI-Powered DevSecOps Pipeline &amp; Monitoring Agent</h3>
+            <p>An AI layer on top of the Jenkins Shared Library and the Grafana stack. It reviews every pull request for security issues, turns raw alerts into summarised incidents and reads failed build logs so nobody has to.</p>
+            <div class="stack">
+              <span class="chip">Claude Code</span><span class="chip">PR-Agent</span><span class="chip">Grafana MCP</span><span class="chip">Jenkins</span><span class="chip">Prometheus</span>
+            </div>
+          </div>
+          <ul class="feat-list">
+            <li><b>Code review</b>A PR-Agent and Claude Code stage checks every pull request for hardcoded secrets, injection, insecure dependencies and code quality.</li>
+            <li><b>Alerting</b>Through the Grafana MCP server the agent reads firing alerts, queries Prometheus metrics and dashboards, and manages alert rules.</li>
+            <li><b>Pipeline analysis</b>AI reads build logs and failed runs to pinpoint flaws and bottlenecks in pipeline stages, replacing slow manual log reading.</li>
+            <li><b>Configuration</b>Claude Code generates and validates appsettings and service files for Prod, Pre-Prod and UAT.</li>
           </ul>
         </article>
-        <article class="proj">
-          <div class="proj-top"><h3>Melvin's Mansion</h3><span class="modality">Rubric eval</span></div>
-          <p>Rubric-based evaluation of model outputs, known on Outlier for its strict rules and tight timers.</p>
-          <ul>
-            <li>Designed prompts and scenarios to find where models fail specific criteria</li>
-            <li>Graded model outputs against detailed, strict rubrics</li>
-            <li>Delivered accurate work under tight time limits</li>
-          </ul>
+
+        <article class="project">
+          <span class="label">CI/CD</span>
+          <h3>CI/CD Pipeline on a Jenkins Shared Library</h3>
+          <p>A reusable Shared Library that standardises deployments across Production, Pre-Production and UAT. Deployment time dropped by 60–70% and manual deployments stopped. A rollback stage restores the whole deployment to the previous stable build.</p>
+          <div class="stack"><span class="chip plain">Jenkins</span><span class="chip plain">Shared Library</span><span class="chip plain">Docker</span><span class="chip plain">Git</span></div>
         </article>
-        <article class="proj">
-          <div class="proj-top"><h3>Aether</h3><span class="modality">Text · LLM</span></div>
-          <p>Evaluated and improved model responses against detailed project guidelines.</p>
-          <ul>
-            <li>Rated responses on accuracy, helpfulness, safety and instruction following</li>
-            <li>Wrote clear justifications for every rating</li>
-            <li>Kept up with guideline updates between task batches</li>
-          </ul>
+
+        <article class="project">
+          <span class="label">Infrastructure</span>
+          <h3>Production Infrastructure, Monitoring &amp; Cloud Migration</h3>
+          <p>Built 70+ production servers with Nginx, set up Prometheus and Grafana dashboards for system and application health, and moved workloads from AWS to a private cloud.</p>
+          <div class="stack"><span class="chip plain">Linux</span><span class="chip plain">Nginx</span><span class="chip plain">AWS</span><span class="chip plain">Prometheus</span><span class="chip plain">Grafana</span></div>
         </article>
-        <article class="proj">
-          <div class="proj-top"><h3>Image to Text</h3><span class="modality">Vision</span></div>
-          <p>Wrote and reviewed image descriptions used to train and evaluate vision-language models.</p>
-          <ul>
-            <li>Detailed, grounded captions with no invented details</li>
-            <li>Flagged hallucinated objects, counts and text in model outputs</li>
-            <li>Checked spatial relationships and visible text (OCR)</li>
-          </ul>
+
+        <article class="project">
+          <span class="label">Containers</span>
+          <h3>3-Tier Application</h3>
+          <p>An Angular, Node.js and SQL application with each tier containerised in Docker, so the whole stack sets up the same way on any machine.</p>
+          <div class="stack"><span class="chip plain">Docker</span><span class="chip plain">Angular</span><span class="chip plain">Node.js</span><span class="chip plain">SQL</span></div>
         </article>
-        <article class="proj">
-          <div class="proj-top"><h3>Audio to Text</h3><span class="modality">Speech</span></div>
-          <p>Transcribed and corrected audio for speech recognition training data.</p>
-          <ul>
-            <li>Verbatim transcription with speaker labels and timestamps</li>
-            <li>Handled accents, overlapping speech and background noise</li>
-            <li>Followed tagging conventions for non-speech events</li>
-          </ul>
-        </article>
-        <article class="proj">
-          <div class="proj-top"><h3>Other projects</h3><span class="modality">Mixed</span></div>
-          <p>Many more projects across the training pipeline.</p>
-          <ul>
-            <li>Preference ranking between model responses (RLHF)</li>
-            <li>Writing prompt and ideal-response pairs (SFT)</li>
-            <li>Fact-checking and reviewing other contributors' tasks</li>
-          </ul>
-        </article>
+
       </div>
     </div>
   </section>
 
-  <section id="agents">
-    <div class="agents">
-      <div>
-        <div class="sec-head">
-          <span class="label">AI Agents</span>
-          <h2>I also build the systems that use these models</h2>
-          <p>Beyond training data, I design and build AI agents: LLM-driven workflows that plan, call tools and check their own output. Knowing how models are trained helps me see where agents will fail, and building agents shows me what good training data needs to cover. On Outlier's Terminal-Bench project I wrote the tasks that test agents like these.</p>
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Skills</span>
+        <h2>Toolchain</h2>
+      </div>
+      <div class="skills">
+        <div class="skill-row"><h3>AI &amp; Agents</h3><div class="chips"><span class="chip">Claude Code</span><span class="chip">PR-Agent</span><span class="chip">Grafana MCP server</span><span class="chip">Model Context Protocol</span><span class="chip">AI agents</span><span class="chip">AI root-cause analysis</span></div></div>
+        <div class="skill-row"><h3>DevSecOps</h3><div class="chips"><span class="chip">AI vulnerability scanning in CI/CD</span><span class="chip">Secure code review</span><span class="chip">Configuration validation</span></div></div>
+        <div class="skill-row"><h3>CI/CD &amp; Version Control</h3><div class="chips"><span class="chip">Jenkins Pipelines</span><span class="chip">Jenkins Shared Libraries</span><span class="chip">Git</span></div></div>
+        <div class="skill-row"><h3>Monitoring &amp; Visualization</h3><div class="chips"><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">Grafana Alerting</span><span class="chip">Tableau</span></div></div>
+        <div class="skill-row"><h3>Cloud &amp; IaC</h3><div class="chips"><span class="chip">AWS EC2</span><span class="chip">S3</span><span class="chip">IAM</span><span class="chip">VPC</span><span class="chip">CloudWatch</span><span class="chip">Terraform</span></div></div>
+        <div class="skill-row"><h3>Containers</h3><div class="chips"><span class="chip">Docker</span><span class="chip">Kubernetes</span></div></div>
+        <div class="skill-row"><h3>OS, Web Server &amp; Scripting</h3><div class="chips"><span class="chip">Linux</span><span class="chip">Nginx</span><span class="chip">Bash</span></div></div>
+        <div class="skill-row"><h3>Environments</h3><div class="chips"><span class="chip">Production</span><span class="chip">Pre-Production</span><span class="chip">UAT</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Education</span>
+        <h2>Computer applications</h2>
+      </div>
+      <div class="sec-body">
+        <span></span>
+        <div class="edu">
+          <div class="edu-row"><h3>Master of Computer Applications</h3><span class="when">Sept 2022 – Jun 2024</span><span class="school">JIMS · GGSIPU</span><span class="gpa">CGPA 8.1</span></div>
+          <div class="edu-row"><h3>Bachelor of Computer Applications</h3><span class="when">Aug 2019 – Jun 2022</span><span class="school">SIMS · GGSIPU</span><span class="gpa">CGPA 8.7</span></div>
         </div>
-        <ul class="list">
-          <li><strong>Tool calling &amp; function design</strong><span>Defining tools, schemas and the instructions that make agents use them correctly.</span></li>
-          <li><strong>Multi-step workflows</strong><span>Agents that break a task into steps, act, and verify results before moving on.</span></li>
-          <li><strong>Retrieval (RAG)</strong><span>Grounding answers in documents so outputs stay factual.</span></li>
-          <li><strong>Evaluation</strong><span>Test sets and rubrics to measure agent quality, using the same skills I use in AI training.</span></li>
-        </ul>
-      </div>
-      <div class="pipeline" aria-label="How an agent I build typically works">
-        <div class="label" style="margin-bottom:10px">Typical agent loop</div>
-        <div class="step"><span class="n">01</span><span>receive task <span class="c">// user goal + context</span></span></div>
-        <div class="step"><span class="n">02</span><span>plan steps <span class="c">// decompose the goal</span></span></div>
-        <div class="step"><span class="n">03</span><span>call tools <span class="c">// search, APIs, code, files</span></span></div>
-        <div class="step"><span class="n">04</span><span>check output <span class="c">// against a rubric</span></span></div>
-        <div class="step"><span class="n">05</span><span>retry or return <span class="c">// with sources</span></span></div>
       </div>
     </div>
   </section>
 
-  <section id="contribute">
-    <div class="sec-head">
-      <span class="label">Why the platform side</span>
-      <h2>How I'd contribute to Outlier, Mercor and similar platforms</h2>
-      <p>After two years as a contributor I know where tasks get confusing, where quality slips and what keeps good contributors on a project. I want to fix those things from the inside.</p>
-    </div>
-    <div class="offer">
-      <div><h3>Quality &amp; review</h3><p>Reviewing contributor work, calibrating raters, catching low-quality or AI-generated submissions and giving useful feedback.</p></div>
-      <div><h3>Task &amp; rubric design</h3><p>Writing clear guidelines, examples and rubrics that contributors can follow and that clients can trust.</p></div>
-      <div><h3>Project ops &amp; tooling</h3><p>Onboarding contributors, running projects across modalities and building agent-based tools that speed up QA.</p></div>
-    </div>
-    <p class="targets">Roles I'm interested in: <b>Quality Lead / Reviewer</b>, <b>Project Operations</b>, <b>Task &amp; Guideline Writer</b>, <b>AI Trainer (in-house)</b>, <b>Agent / Evaluation Engineer</b>.</p>
-  </section>
-
-  <section id="skills">
-    <div class="sec-head">
-      <span class="label">Skills</span>
-      <h2>What I work with</h2>
-    </div>
-    <div class="skills">
-      <div><h3>AI training</h3><div class="tags"><span>RLHF</span><span>SFT</span><span>Preference ranking</span><span>Rubric scoring</span><span>Red-teaming</span><span>Fact-checking</span></div></div>
-      <div><h3>Modalities</h3><div class="tags"><span>LLM text</span><span>Image captioning</span><span>OCR review</span><span>Transcription</span><span>Speaker labeling</span></div></div>
-      <div><h3>Agents &amp; tools</h3><div class="tags"><span>LLM APIs</span><span>Tool calling</span><span>RAG</span><span>Prompt engineering</span><span>Agent evaluation</span><span>Agent benchmark tasks</span></div></div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="contact">
-      <div class="sec-head" style="margin:0">
-        <span class="label">Contact</span>
-        <h2>Let's talk about your next project</h2>
-        <p>I'm available for full-time or contract roles on AI training platform teams. Remote friendly.</p>
-      </div>
-      <div class="contact-box">
-        <div class="c-row"><span class="label">Email</span><span class="v">codebylakshay@gmail.com</span></div>
-        <div class="c-row"><span class="label">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/lakshay-varshney/" target="_blank" rel="noopener">linkedin.com/in/lakshay-varshney</a></span></div>
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <div>
+          <h2>Let's talk about your pipeline.</h2>
+          <p>I'm looking for DevOps and DevSecOps roles where CI/CD, monitoring and AI tooling meet. Based in Noida, India.</p>
+        </div>
+        <div class="contact-list">
+          <div class="c-row"><span class="label">Email</span><a class="val" id="c-email" href="mailto:codebylakshay@gmail.com">codebylakshay@gmail.com</a><button class="copy" type="button" data-copy="codebylakshay@gmail.com">Copy</button></div>
+          <div class="c-row"><span class="label">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/lakshay-varshney/" target="_blank" rel="noopener">in/lakshay-varshney</a><button class="copy" type="button" data-copy="https://www.linkedin.com/in/lakshay-varshney/">Copy</button></div>
+          <div class="c-row"><span class="label">Location</span><span class="val">Noida, India</span><span></span></div>
+        </div>
       </div>
     </div>
   </section>
+</main>
 
-  <footer>© 2026 Lakshay Varshney · AI Training Specialist &amp; Agent Builder</footer>
-</div>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Lakshay Varshney</span>
+    <span>DevOps · DevSecOps · AI-augmented CI/CD</span>
+  </div>
+</footer>
 
 <script>
-const samples = {
-  text: {
-    id: "sample · rlhf-eval",
-    prompt: "Explain why the sky is blue to a 10-year-old in under 80 words.",
-    response: "Sunlight has all colors. When it hits air, <mark>blue light scatters the most</mark> because its waves are short, so blue reaches your eyes from every direction.",
-    rubric: [["Accuracy",5],["Instruction following",5],["Tone for audience",4],["Concision",5]],
-    verdict: ["Preferred over B", "good"], note: "Meets word limit · no errors"
-  },
-  image: {
-    id: "sample · vlm-caption",
-    prompt: "[image] A kitchen counter with fruit and a handwritten note.",
-    response: "Three bananas and <mark>two red apples</mark> sit beside a note reading “Buy milk”. A <mark>coffee mug</mark> is in the background.",
-    rubric: [["Grounded in image",3],["Object counts",2],["Text (OCR) correct",5],["Completeness",4]],
-    verdict: ["Hallucination flagged", "warn"], note: "Only one apple visible · no mug"
-  },
-  audio: {
-    id: "sample · asr-transcript",
-    prompt: "[audio 00:14] Two speakers, café background noise.",
-    response: "<b>S1</b> [00:02] So are we still on for Friday? <b>S2</b> [00:05] Yeah, <mark>[inaudible]</mark> around six. [laughs]",
-    rubric: [["Verbatim accuracy",5],["Speaker labels",5],["Timestamps",4],["Tag conventions",5]],
-    verdict: ["Approved", "good"], note: "Tags follow guideline v3"
-  }
-};
-const body = document.getElementById("task-body");
-const idEl = document.getElementById("task-id");
-function render(k){
-  const s = samples[k];
-  idEl.textContent = s.id;
-  body.innerHTML = `
-    <div class="field"><span class="label">Input</span><div class="input-box">${s.prompt}</div></div>
-    <div class="field"><span class="label">Model output</span><p>${s.response}</p></div>
-    <div class="rubric">${s.rubric.map(([n,v]) =>
-      `<div class="row"><span>${n}</span><span class="dots" aria-label="${v} of 5">${[1,2,3,4,5].map(i=>`<b class="${i<=v?'on':''}"></b>`).join("")}</span></div>`).join("")}</div>
-    <div class="verdict"><span class="chip ${s.verdict[1]}">${s.verdict[0]}</span><span class="task-id">${s.note}</span></div>`;
-}
-document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x===b));
-  body.classList.add("swap");
-  setTimeout(() => { render(b.dataset.k); body.classList.remove("swap"); }, 150);
-}));
-render("text");
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var text = btn.getAttribute('data-copy');
+    var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); };
+    var fallback = function(){
+      var row = btn.parentElement.querySelector('.val');
+      var r = document.createRange(); r.selectNodeContents(row);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+      setTimeout(function(){ btn.textContent = 'Copy'; }, 1600);
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    } catch(e){ fallback(); }
+  });
+});
 </script>
 
+</body>
 </html>
